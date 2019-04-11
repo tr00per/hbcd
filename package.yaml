@@ -1,0 +1,34 @@
+name:                hbcd
+version:             0.1.0.0
+synopsis:            Simple library to read/write Binary-Coded Decimals
+homepage:            https://github.com/tr00per/hbcd
+license:             MIT
+author:              Artur Czajka
+maintainer:          arturczajka@gmail.com
+copyright:           2017-2019 Artur Czajka
+category:            Serialization
+extra-source-files:
+    - README.md
+
+dependencies:
+    - base >= 4.7 && < 5
+    - bytestring
+    - extra
+
+library:
+    source-dirs: src
+    exposed-modules:
+      - Data.Serialization.BCD
+    ghc-options:
+      - -Wall
+
+tests:
+    test:
+        source-dirs: tests
+        main: Tests.hs
+        dependencies:
+            - tasty
+            - tasty-hunit
+            - tasty-quickcheck
+            - tasty-smallcheck
+            - hbcd
