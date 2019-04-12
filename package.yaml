@@ -18,7 +18,9 @@ dependencies:
 library:
     source-dirs: src
     exposed-modules:
-      - Data.Serialization.BCD
+      - Data.Serialization.BCD.Packed
+      - Data.Serialization.BCD.Simple
+      - Data.Serialization.BCD.Telephony
     ghc-options:
       - -Wall
 
