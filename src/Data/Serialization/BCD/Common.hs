@@ -1,3 +1,4 @@
+{-# LANGUAGE TypeSynonymInstances #-}
 module Data.Serialization.BCD.Common where
 
 import           Data.Bits
@@ -21,6 +22,10 @@ class BCD a where
 instance SimpleHex Int where
     toHex x = upper $ showHex x ""
     fromHex x = let [(out, _)] = readHex x in out
+
+instance SimpleHex Bytes where
+    toHex   = upper . BS.foldr showHex ""
+    fromHex = pack . map fst . concatMap (readHex . (:[]))
 
 pack :: [Word8] -> Bytes
 pack = BS.pack . compress where

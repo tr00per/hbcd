@@ -7,18 +7,15 @@ module Data.Serialization.BCD.Packed
 import           Data.Serialization.BCD.Common
 
 import           Control.Arrow                 ((***))
-import qualified Data.ByteString               as BS
-import           Data.List.Extra               (unsnoc, upper)
+import           Data.List.Extra               (unsnoc)
 import           Data.Maybe                    (fromMaybe)
 import           Data.Word                     (Word8)
-import           Numeric                       (readHex, showHex)
-
 
 newtype Packed = Packed Bytes deriving (Show, Eq)
 
 instance SimpleHex Packed where
-    toHex (Packed bs) = upper $ BS.foldr showHex "" bs
-    fromHex = Packed . pack . map fst . concatMap (readHex . (:[]))
+    toHex (Packed bs) = toHex bs
+    fromHex = Packed . fromHex
 
 instance BCD Packed where
     code n = Packed $ pack $ digits n ++ sign
