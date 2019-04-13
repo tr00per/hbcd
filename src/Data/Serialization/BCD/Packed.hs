@@ -18,14 +18,14 @@ instance SimpleHex Packed where
     fromHex = Packed . fromHex
 
 instance BCD Packed where
-    code n = Packed $ pack $ digits n ++ sign
+    code n = Packed $ pack frontPadding id $ digits n ++ sign
         where
         sign :: [Word8]
         sign | n < 0  = [0xD]
              | n >= 0 = [0xC]
              | otherwise = [0]
 
-    decode (Packed b) = combine $ number *** sign $ fromMaybe ([], 0) $ unsnoc $ unpack b
+    decode (Packed b) = combine $ number *** sign $ fromMaybe ([], 0) $ unsnoc $ unpack id b
         where
         sign :: Num a => Word8 -> a
         sign x = case x of

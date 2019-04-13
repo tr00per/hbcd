@@ -13,6 +13,6 @@ instance SimpleHex Simple where
     fromHex = Simple . fromHex
 
 instance BCD Simple where
-    code = undefined
+    code = Simple . pack frontPadding id . digits
 
-    decode = undefined
+    decode (Simple b) = number $ unpack id b

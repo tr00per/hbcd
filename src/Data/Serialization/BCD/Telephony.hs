@@ -13,6 +13,6 @@ instance SimpleHex Telephony where
     fromHex = Telephony . fromHex
 
 instance BCD Telephony where
-    code = undefined
+    code = Telephony . pack backPadding swapPair . digits
 
-    decode = undefined
+    decode (Telephony b) = number $ unpack swapPair b
